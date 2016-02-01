@@ -6,7 +6,7 @@
 	<groupId>org.test</groupId>
 	<artifactId>single_simple</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>single_simple</name>
 	<description>Single project without wro4j complexity</description>
@@ -33,6 +33,11 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>				
 <!-- 		
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
@@ -61,6 +66,7 @@
 	</properties>
 
 	<build>
+		<finalName>single</finalName>
 		<resources>
 			<resource>
 				<directory>${project.basedir}/src/main/resources</directory>
@@ -156,7 +162,57 @@
 				</dependencies>
 			</plugin>
 -->			
+
+		<!-- WebLogic Server 12c Maven Plugin -->
+			<plugin>
+				<groupId>com.oracle.weblogic</groupId>
+				<artifactId>wls-maven-plugin</artifactId>
+				<version>12.1.1.0</version>
+				<configuration>
+					<adminurl>${adminurl}</adminurl>
+					<middlewareHome>${middlewareHome}</middlewareHome>
+					<weblogicHome>${weblogicHome}</weblogicHome>
+					<domainHome>${domainHome}</domainHome>
+					<user>${user}</user>
+					<password>${password}</password>
+					<name>${name}</name>
+					<remote>${remote}</remote>
+					<upload>${upload}</upload>
+					<targets>${targets}</targets>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
+
+	<profiles>
+		<!-- localhost environment -->
+		<profile>
+			<id>local</id>
+
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+
+			<properties>
+				<!-- Application server properties -->
+				<adminurl>t3://localhost:7001</adminurl>
+				<middlewareHome>C:\Oracle\Middleware2\Oracle_Home\wlserver</middlewareHome>
+				<weblogicHome>C:\Oracle\Middleware2\Oracle_Home\wlserver</weblogicHome>
+				<domainHome>C:\Oracle\Middleware2\Oracle_Home\user_projects\domains\egate_domain</domainHome>
+				<user>weblogic</user>
+				<password>weblogic1</password>
+				<name>${project.artifactId}-${project.version}</name>
+				<remote>false</remote>
+				<upload>true</upload>
+				<targets>AdminServer</targets>
+
+				<!-- Environment -->
+				<environment>Local Environment</environment>
+
+			</properties>
+		</profile>
+	</profiles>
+
 
 </project>
