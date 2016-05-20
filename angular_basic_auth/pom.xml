@@ -1,0 +1,116 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.jai.angular.security.basic</groupId>
+	<artifactId>angular_basic_auth</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>angular_basic_auth Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>basic</finalName>
+		<plugins>
+
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>exec-bower-install</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<executable>bower</executable>
+							<arguments>
+								<argument>install</argument>
+							</arguments>
+						</configuration>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- WebLogic Server 12c Maven Plugin -->
+			<plugin>
+				<groupId>com.oracle.weblogic</groupId>
+				<artifactId>wls-maven-plugin</artifactId>
+				<version>12.1.1.0</version>
+				<configuration>
+					<adminurl>${adminurl}</adminurl>
+					<middlewareHome>${middlewareHome}</middlewareHome>
+					<weblogicHome>${weblogicHome}</weblogicHome>
+					<domainHome>${domainHome}</domainHome>
+					<user>${user}</user>
+					<password>${password}</password>
+					<name>${name}</name>
+					<remote>${remote}</remote>
+					<upload>${upload}</upload>
+					<targets>${targets}</targets>
+				</configuration>
+			</plugin>
+
+
+			<!-- Tomcat plugin -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<path>/${project.build.finalName}</path>
+					<update>true</update>
+					<url>http://localhost:8080/manager/text</url>
+					<username>jay</username>
+					<password>jay</password>
+				</configuration>
+			</plugin>
+		</plugins>
+
+	</build>
+
+
+	<profiles>
+		<!-- localhost environment -->
+		<profile>
+			<id>local</id>
+
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+
+			<properties>
+				<!-- Application server properties -->
+				<adminurl>t3://localhost:7001</adminurl>
+				<middlewareHome>C:/Oracle/Middleware</middlewareHome>
+				<weblogicHome>wlserver_12.1</weblogicHome>
+				<domainHome>C:/Oracle/Middleware/user_projects/domains/cir_domain</domainHome>
+				<user>weblogic</user>
+				<password>weblogic1</password>
+				<name>${project.artifactId}-${project.version}</name>
+				<remote>false</remote>
+				<upload>true</upload>
+				<targets>AdminServer</targets>
+
+			</properties>
+		</profile>
+	</profiles>
+
+</project>

@@ -1,0 +1,40 @@
+<div ng-app="basicApp" ng-controller="MyController">
+
+	<form name="loginForm" role="form" novalidate="novalidate">
+
+		<br>
+		<p class="heading">Login</p>
+		<br>
+
+		<div class="alert alert-danger" ng-show="error">Invalid Credentials. Please try again.</div>
+
+		<div class="form-group">
+			<label class="control-label col-md-2 required">Username</label>
+			<div class="col-md-3">
+				<input type="text" name="username" ng-model="username" class="form-control" required="required">
+			</div>
+			<div class="error" ng-messages="loginForm.username.$error" ng-if="loginForm.username.$touched">
+				<div ng-message="required">Required field</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-md-2 required">Password</label>
+			<div class="col-md-3">
+				<input type="password" name="password" ng-model="password" class="form-control" required="required">
+			</div>
+			<div class="error" ng-messages="loginForm.password.$error" ng-if="loginForm.password.$touched">
+				<div ng-message="required">Required field</div>
+			</div>
+		</div>
+
+		<br>
+
+		<div class="row">
+			<button type="button" class="btn btn-primary" ng-click="onLoginButton()">Login</button>
+			<button type="button" class="btn btn-primary" ng-click="onLogoutButton()">Logout</button>
+			<button type="reset" class="btn btn-primary">Reset</button>
+		</div>
+	</form>
+
+</div>
