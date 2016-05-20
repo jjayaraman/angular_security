@@ -67,6 +67,7 @@
 
 	<build>
 		<finalName>single</finalName>
+<!-- 		
 		<resources>
 			<resource>
 				<directory>${project.basedir}/src/main/resources</directory>
@@ -75,6 +76,7 @@
 				<directory>${project.build.directory}/generated-resources</directory>
 			</resource>
 		</resources>
+ -->	
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

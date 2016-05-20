@@ -1,5 +1,7 @@
 angular.module('hello', [ 'ngRoute' ]).config(function($routeProvider, $httpProvider) {
 
+	console.log("Entering route...");
+	
 	$routeProvider.when('/', {
 		templateUrl : 'home.html',
 		controller : 'home'
