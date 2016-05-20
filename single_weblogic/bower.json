@@ -1,0 +1,33 @@
+{
+  "name": "simple_wl",
+  "version": "0.0.0",
+  "homepage": "https://www.eba.europa.eu",
+  "authors": [
+    "Jayakumar Jayaraman <jayakumar.jayaraman@eba.europa.eu>"
+  ],
+  "description": "Angular web app with Basic authentication - custom login form",
+  "main": "src/main/webapp/index.jsp",
+  "keywords": [
+    "angular",
+    "basic",
+    "authentication"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.11.3",
+	"bootstrap":"3.3.6",
+	"angular":"1.5.0",
+	"angular-route":"1.5.0",
+	"angular-basicauth":"latest"
+  },
+  "resolutions": {
+    "angular": "1.5.0"
+  }
+}
